@@ -33,6 +33,38 @@ _.prototype = {
         this.collection = result;
         return this;
     },
+    mapvalues: function () {
+        var result = [];
+        for(var key in this.collection){
+               result.push(func(this.collection[key],key));
+           }
+        this.collection = result;
+        return this;
+    },
+    mapkeys: function () {
+        var result = [];
+        for(var key in this.collection){
+               result.push(func(key));
+           }
+        this.collection = result;
+        return this;
+    },
+    values: function () {
+        var result = [];
+        for(var key in this.collection){
+               result.push(this.collection[key]);
+           }
+        this.collection = result;
+        return this;
+    },
+    keys: function () {
+        var result = [];
+        for(var key in this.collection){
+               result.push(key);
+           }
+        this.collection = result;
+        return this;
+    },
     filter: function(func) {
         var result = []
         this.each(function (element, i) {
@@ -183,25 +215,61 @@ _.prototype = {
         this.collection = temp;
         return this;
     },
-    num_map_letter: function (element) {
+    num_map_letter: function () {
         var letters = 'zabcdefghijklmnopqrstuvwxyz';
         var LETTERS_LENGH = 26;
-        var result;
-        if (element / LETTERS_LENGH > 1) {
-            var first_letter = letters.charAt((Math.ceil(element / LETTERS_LENGH))-1);
-            var second_letter = letters.charAt(element%LETTERS_LENGH);
-            result = first_letter + second_letter;
-        }else {
-            result = letters.charAt(element);
-        }
+        var result = [];
+        this.each(function (element) {
+            if (element / LETTERS_LENGH > 1) {
+                var first_letter = letters.charAt((Math.ceil(element / LETTERS_LENGH))-1);
+                var second_letter = letters.charAt(element%LETTERS_LENGH);
+                result.push(first_letter + second_letter);
+            }else {
+                result.push(letters.charAt(element));
+            }
+        });
         this.collection = result;
         return this;
     },
-    values: function () {
+    findWhere: function (items) {
         var result;
-        for(var key in this.collection) {
-            result.push(this.collection[key]);
+        if (Array.isArray(this.collection)) {
+            this.each(function (element, i) {
+                if (items['barcode'] === element) {
+                    result = element;
+                }
+            });
         }
+        this.each(function (element, i) {
+            if (items['barcode'] === element.barcode) {
+                result = element;
+            }
+        });
+        return result;
+    },
+    get_num_map_letter: function (element) {
+        var result = [];
+        var LENGTH = 26;
+        if(element>LENGTH){
+            var link = '';
+            var left,right,temp;
+            left = String.fromCharCode(Math.ceil(element/LENGTH)+95);
+            var remainder = element%LENGTH;
+            temp = remainder === 0 ? LENGTH :remainder;
+            right = this.get_charcode(temp);
+            link = left+right;
+            result.push(link);
+        }else{
+            result.push(this.get_charcode(element));
+            }
+        this.collection = result;
+        return this;
+    },
+    get_charcode: function () {
+        var result = [];
+        this.each(function (element) {
+             result.push(String.fromCharCode(element+96));
+        });
         this.collection = result;
         return this;
     },

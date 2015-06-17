@@ -206,6 +206,21 @@ _.prototype = {
         this.collection = result;
         return this;
     },
+    flatten: function () {
+        var result = [];
+        this.each(function (element,i) {
+            if (element.length === undefined) {
+                result.push(element);
+            }
+            for (var j = 0;element.length !== undefined && j < element.length; j++) {
+                if (element[j].length === undefined) {
+                    result.push(element[j]);
+                }
+            }
+        });
+        this.collection = result;
+        return this;
+    },
     group: function (func) {
         var temp = {};
         this.each(function (element, i) {
@@ -278,6 +293,16 @@ _.prototype = {
         var result = [];
         this.each(function (element) {
              result.push(String.fromCharCode(element+96));
+        });
+        this.collection = result;
+        return this;
+    },
+    no_repeat: function () {
+        var result = [];
+        this.each(function(element){
+            if (!_(result).exist(element)) {
+                result.push(element);
+            }
         });
         this.collection = result;
         return this;

@@ -63,12 +63,10 @@ _.prototype = {
         this.collection = result;
         return this;
     },
-    values: function () {
-        var result = [];
+    values: function (func) {
         for(var key in this.collection){
-               result.push(this.collection[key]);
+              func(this.collection[key]);
            }
-        this.collection = result;
         return this;
     },
     keys: function () {

@@ -273,34 +273,26 @@ _.prototype = {
         return result;
     },
     get_num_map_letter: function (element) {
-        var result = [];
-        var LENGTH = 26;
-        if(element>LENGTH){
-            var link = '';
-            var left,right,temp;
-            left = String.fromCharCode(Math.ceil(element/LENGTH)+95);
-            var remainder = element%LENGTH;
-            temp = remainder === 0 ? LENGTH :remainder;
-            right = this.get_charcode(temp);
-            link = left+right;
-            result = link;
-        }else{
-            result = this.get_charcode(element);
-            }
+        var letters = 'zabcdefghijklmnopqrstuvwxyz';
+        var LETTERS_LENGH = 26;
+        var result;
+        if (element / LETTERS_LENGH > 1) {
+            var first_letter = letters.charAt((Math.ceil(element / LETTERS_LENGH))-1);
+            var second_letter = letters.charAt(element%LETTERS_LENGH);
+            result = first_letter + second_letter;
+        }else {
+            result = letters.charAt(element);
+        }
         this.collection = result;
         return this;
     },
-    get_charcode: function (number) {
+    get_charcode: function () {
         var result = [];
-        if (number.length === undefined) {
-            return String.fromCharCode(number+96);
-        }else {
-            this.each(function (element) {
-                 result.push(String.fromCharCode(element+96));
-            });
-            this.collection = result;
-            return this;
-        }
+        this.each(function (element) {
+             result.push(String.fromCharCode(element+96));
+        });
+        this.collection = result;
+        return this;
     },
     no_repeat: function (collection) {
         var result = [];

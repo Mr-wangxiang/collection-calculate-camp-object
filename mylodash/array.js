@@ -209,8 +209,17 @@ _.prototype = {
     group: function (func) {
         var temp = {};
         this.each(function (element, i) {
-            temp[func(item)] = temp[func(item)] || [];
-            temp[func(item)].push(element);
+            temp[func(element)] = temp[func(element)] || [];
+            temp[func(element)].push(element);
+        });
+        this.collection = temp;
+        return this;
+    },
+    num_group: function (func) {
+        var temp = {};
+        this.each(function (element, i) {
+            temp[func(element)] = temp[func(element)] || 0;
+            temp[func(element)]++;
         });
         this.collection = temp;
         return this;

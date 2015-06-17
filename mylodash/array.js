@@ -283,20 +283,24 @@ _.prototype = {
             temp = remainder === 0 ? LENGTH :remainder;
             right = this.get_charcode(temp);
             link = left+right;
-            result.push(link);
+            result = link;
         }else{
-            result.push(this.get_charcode(element));
+            result = this.get_charcode(element);
             }
         this.collection = result;
         return this;
     },
-    get_charcode: function () {
+    get_charcode: function (number) {
         var result = [];
-        this.each(function (element) {
-             result.push(String.fromCharCode(element+96));
-        });
-        this.collection = result;
-        return this;
+        if (number.length === undefined) {
+            return String.fromCharCode(number+96);
+        }else {
+            this.each(function (element) {
+                 result.push(String.fromCharCode(element+96));
+            });
+            this.collection = result;
+            return this;
+        }
     },
     no_repeat: function (collection) {
         var result = [];

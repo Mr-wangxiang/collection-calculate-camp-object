@@ -7,5 +7,4 @@ var rank_asc = function(collection) {
     }).value();
     return asc_array;
 };
-
 module.exports = rank_asc;

@@ -1,21 +1,16 @@
 'use strict';
 var _ = require('../../../../mylodash/array.js');
 var single_element = function(collection){
-    var temp = {};
+    var result = [];
     _(collection).filter(function (element,i) {
         return (i+1)%2 === 0;
-    }).each(function (element, i) {
-        temp[element+'_'] = temp[element+'_'] || 0;
-        temp[element+'_'] = temp[element+'_'] + 1;
-    });
-    var result = [];
-    for (var x in temp) {
-        if (temp[x] == 1) {
-        result.push(parseInt(x));
+    }).num_group(function (element) {
+        return element+'_';
+    }).values(function (value,key) {
+        if (value == 1) {
+        result.push(parseInt(key));
         }
-    }
-    return result ;
-
-
+    });
+    return result;
 };
 module.exports = single_element;

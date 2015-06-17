@@ -65,7 +65,7 @@ _.prototype = {
     },
     values: function (func) {
         for(var key in this.collection){
-              func(this.collection[key]);
+              func(this.collection[key],key);
            }
         return this;
     },

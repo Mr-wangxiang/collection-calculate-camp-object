@@ -18,6 +18,19 @@ var filter = function (collection,func) {
     });
     return result;
 };
+var get_num_map_letter = function (element) {
+    var letters = 'zabcdefghijklmnopqrstuvwxyz';
+    var LETTERS_LENGH = 26;
+    var result;
+    if (element / LETTERS_LENGH > 1) {
+        var first_letter = letters.charAt((Math.ceil(element / LETTERS_LENGH))-1);
+        var second_letter = letters.charAt(element%LETTERS_LENGH);
+        result = first_letter + second_letter;
+    }else {
+        result = letters.charAt(element);
+    }
+    return result;
+};
 _.prototype = {
     constructor: _,
     each: function (func) {

@@ -1,9 +1,5 @@
 'use strict';
 var _ = require('../../../mylodash/array.js');
-function from_char_code(num) {
-    return String.fromCharCode(num+96);
-}
-
 function even_to_letter(collection) {
 
   var array = [];
@@ -12,9 +8,7 @@ function even_to_letter(collection) {
   });
   var result = _(array).filter(function (element) {
       return element%2 === 0;
-  }).map(function (element) {
-      return from_char_code(element);
-  }).value();
+  }).get_charcode().value();
   return result;
 }
 

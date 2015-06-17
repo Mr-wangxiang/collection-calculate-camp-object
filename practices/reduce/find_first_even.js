@@ -7,5 +7,4 @@ function find_first_even(collection) {
     }).first() ;
     return first_even;
 }
-
 module.exports = find_first_even;

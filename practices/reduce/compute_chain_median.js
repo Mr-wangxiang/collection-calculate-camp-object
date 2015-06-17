@@ -11,5 +11,4 @@ function compute_chain_median(collection) {
   }).cal_median();
   return median_num;
 }
-
 module.exports = compute_chain_median;

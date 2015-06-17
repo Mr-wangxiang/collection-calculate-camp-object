@@ -1,5 +1,4 @@
 'use strict';
-
 function compare_collections(collection_a, collection_b) {
   if ((collection_a + '') === (collection_b + '')) {
       return true;
@@ -7,5 +6,4 @@ function compare_collections(collection_a, collection_b) {
       return false;
   }
 }
-
 module.exports = compare_collections;

@@ -159,10 +159,10 @@ _.prototype = {
             this.collection = this.filter(func).value();
             return this.sum()/filter_array.length;
         }
-        if (result.length === 1) {
-            return result[0];
+        if (this.collection.length === 1) {
+            return this.collection[0];
         }
-        return this.sum()/result.length;
+        return this.sum()/this.collection.length;
     },
     array_sort: function (func) {
        var result = this.filter(function (element) {
@@ -333,6 +333,24 @@ _.prototype = {
         }
         this.collection = result;
         return this;
+    },
+    first_index: function (element_index) {
+        var index = 0;
+        this.each(function (element,i) {
+            if (element === element_index ) {
+                index = i;
+                return index;
+            }
+        });
+    },
+    last_index: function (element_index) {
+        var index = 0;
+        this.each(function (element,i) {
+            if (element === element_index ) {
+                index = i;
+            }
+        });
+        return index;
     },
     value: function() {
         return this.collection;

@@ -12,5 +12,4 @@ function compute_median(collection) {
   }).cal_median();
   return result;
 }
-
 module.exports = compute_median;

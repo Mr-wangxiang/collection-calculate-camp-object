@@ -24,6 +24,7 @@ _.prototype = {
         for (var i = 0; i < this.collection.length; i++) {
             func(this.collection[i], i);
         }
+        return this;
     },
     map: function(func) {
         var result = [];
@@ -297,13 +298,39 @@ _.prototype = {
         this.collection = result;
         return this;
     },
-    no_repeat: function () {
+    no_repeat: function (collection) {
         var result = [];
-        this.each(function(element){
-            if (!_(result).exist(element)) {
-                result.push(element);
-            }
-        });
+        if (collection != undefined) {
+            this.each(function(element){
+                if (_(collection).exist(element)) {
+                    result.push(element);
+                }
+            });
+        }else {
+            this.each(function(element){
+                if (!_(result).exist(element)) {
+                    result.push(element);
+                }
+            });
+        }
+        this.collection = result;
+        return this;
+    },
+    repeat: function (collection) {
+        var result = [];
+        if (collection != undefined) {
+            this.each(function(element){
+                if (!_(collection).exist(element)) {
+                    result.push(element);
+                }
+            });
+        }else {
+            this.each(function(element){
+                if (_(result).exist(element)) {
+                    result.push(element);
+                }
+            });
+        }
         this.collection = result;
         return this;
     },

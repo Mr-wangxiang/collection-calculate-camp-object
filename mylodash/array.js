@@ -343,17 +343,19 @@ _.prototype = {
     },
     first_index: function (element_index) {
         var index = 0;
+        var flag = true;
         this.each(function (element,i) {
-            if (element === element_index ) {
+            if (element === element_index && flag) {
                 index = i;
-                return index;
+                flag = false;
             }
         });
+        return index;
     },
     last_index: function (element_index) {
         var index = 0;
         this.each(function (element,i) {
-            if (element === element_index ) {
+            if (element === element_index) {
                 index = i;
             }
         });
